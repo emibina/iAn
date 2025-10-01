@@ -1,0 +1,65 @@
+
+Tracks
+	<Folders>
+		TrackName-legacy.kml
+UserTracks
+	index.csv
+	<Folders>
+		TrackName-user.kml
+		ref-TrackName.csv
+MathChannels
+	<Folders>
+		math-ChannelName-legacy.csv
+UserMathChannels
+	index.csv
+	<Folders>
+		math-ChannelName-user.csv
+UserData
+	<Folders>
+		Session-LoggerId-DateTime
+			dev-information.csv
+			channel-ChannelName-dev.csv
+			channel-ChannelName-user.csv
+			channel-ChannelName-TrackName-report.csv
+			triggers-dev.csv
+			triggers-user.csv
+			triggers-TrackName.csv
+LogBookDefinitions
+UserLogBookDefinitions
+UserProtocols
+	<Folders>
+		protocol-ProtocolName.csv
+UserConfigurations
+	<Folders>
+		Configuration-LoggerCode-ConfigurationName.csv
+			dev-channel-ChannelName-dev
+Sensors
+	<Folders>
+		sensor-SensorName-legacy.csv
+UserSensors
+	<Folders>
+		sensor-SensorName-legacy.csv
+UserSettings
+	Units.csv
+	AliasForChannels.csv
+		* loggerId
+			- devChName/userChName
+UserDataLayouts
+	TemplatesForChannels
+	TemplatesForPanels
+		panel-typeName-TemplateName.csv
+			* type
+			* ... typeSpecificSettings
+	Pages
+		PanelsPlacement.csv
+			* Status // to be used for compact/complete/other
+			* panelName
+				- top/bottom/left/right
+		panel-PanelName.csv
+			* type
+			* ... typeSpecificSettings
+UserUsage
+	Features.json
+	Devices.json
+
+
