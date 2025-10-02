@@ -20,9 +20,46 @@ target_link_libraries(tool1 cli_common)
 add_executable(tool2 tool2/main.cpp)
 target_link_libraries(tool2 cli_common)
 
-# On Windows, you might want to copy the executables to a common directory
+# ---------- Project version ----------
+set(PROJECT_VERSION_MAJOR 0)
+set(PROJECT_VERSION_MINOR 1)
+set(PROJECT_VERSION_REVISION 0)
+
+# ---------- Determine compiler ----------
+set(COMPILER_DIR ${CMAKE_CXX_COMPILER_ID})
+
+# ---------- Determine architecture ----------
 if(WIN32)
-    set_target_properties(tool1 tool2 PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-    )
+    string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" SYS_PROC_LOWER)
+    if(SYS_PROC_LOWER STREQUAL "amd64" OR SYS_PROC_LOWER STREQUAL "x86_64")
+        set(ARCH_DIR "x64")
+    elseif(SYS_PROC_LOWER STREQUAL "x86")
+        set(ARCH_DIR "Win32")
+    elseif(SYS_PROC_LOWER STREQUAL "arm64")
+        set(ARCH_DIR "ARM64")
+    else()
+        set(ARCH_DIR "${CMAKE_SYSTEM_PROCESSOR}")
+    endif()
+else()
+    # For Linux/macOS, use system processor as-is
+    string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" SYS_PROC_LOWER)
+    if(SYS_PROC_LOWER STREQUAL "x86_64")
+        set(ARCH_DIR "x64")
+    elseif(SYS_PROC_LOWER STREQUAL "aarch64")
+        set(ARCH_DIR "ARM64")
+    else()
+        set(ARCH_DIR "${CMAKE_SYSTEM_PROCESSOR}")
+    endif()
 endif()
+
+# ---------- Define output directory ----------
+set(OUTPUT_DIR ${CMAKE_SOURCE_DIR}/${COMPILER_DIR}-${ARCH_DIR}-$<CONFIG>-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_REVISION})
+
+# ---------- Apply to targets ----------
+foreach(target tool1 tool2)  # add all your targets here
+    set_target_properties(${target} PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR}   # .exe / DLLs
+        ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_DIR}   # .lib / static libs
+        LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR}   # shared libs / DLLs
+    )
+endforeach()
