@@ -24,7 +24,7 @@ protected:
 
 	// Utility methods for derived classes
 	void addOption(const std::string& shortOpt, const std::string& longOpt,
-		const std::string& description, bool hasValue = false);
+		const std::string& description, bool hasValue);
 	bool hasOption(const std::string& option) const;
 	std::string getOptionValue(const std::string& option) const;
 	std::vector<std::string> getArguments() const { return arguments; }

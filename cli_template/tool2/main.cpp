@@ -9,12 +9,12 @@ public:
     
 protected:
     void defineOptions() override {
-        addOption("h", "help", "Show this help message");
-        addOption("u", "uppercase", "Convert to uppercase");
-        addOption("c", "count", "Count lines/words/characters");
+        addOption("h", "help", "Show this help message", false);
+        addOption("u", "uppercase", "Convert to uppercase", false);
+        addOption("c", "count", "Count lines/words/characters", false);
         addOption("f", "filter", "Filter lines containing pattern", true);
-        addOption("s", "sort", "Sort lines");
-        addOption("v", "verbose", "Verbose output");
+        addOption("s", "sort", "Sort lines", false);
+        addOption("v", "verbose", "Verbose output", false);
     }
     
     int execute() override {

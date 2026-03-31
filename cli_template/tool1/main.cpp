@@ -8,10 +8,10 @@ public:
     
 protected:
     void defineOptions() override {
-        addOption("h", "help", "Show this help message");
+        addOption("h", "help", "Show this help message", false);
         addOption("n", "number", "Number of lines to generate", true);
         addOption("p", "prefix", "Prefix for each line", true);
-        addOption("v", "verbose", "Verbose output");
+        addOption("v", "verbose", "Verbose output", false);
     }
     
     int execute() override {
