@@ -11,35 +11,40 @@
 #include <unistd.h>
 #endif
 
-std::vector<std::string> split(const std::string& input, char delimiter = ' ') {
-    std::vector<std::string> tokens;
-    std::stringstream ss(input);
-    std::string item;
-    while (std::getline(ss, item, delimiter)) {
-        if (!item.empty()) tokens.push_back(item);
-    }
-    return tokens;
-}
+//std::vector<std::string> split(const std::string& input, char delimiter = ' ') {
+//    std::vector<std::string> tokens;
+//    std::stringstream ss(input);
+//    std::string item;
+//    while (std::getline(ss, item, delimiter)) {
+//        if (!item.empty()) tokens.push_back(item);
+//    }
+//    return tokens;
+//}
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     std::vector<std::string> args(argv + 1, argv + argc);
 
     bool hasPipeInput = !isatty(fileno(stdin));
     std::vector<std::string> pipedInput;
-    if (hasPipeInput) {
+    if (hasPipeInput)
+    {
         std::string line;
-        while (std::getline(std::cin, line)) {
+        while (std::getline(std::cin, line))
+        {
             if (!line.empty()) pipedInput.push_back(line);
         }
     }
 
-    if (!args.empty()) {
-        std::cout << "[tool] Arguments:\n";
+    if (!args.empty())
+    {
+        std::cout << "[tool2] Arguments:\n";
         for (auto& a : args) std::cout << " - " << a << "\n";
     }
 
-    if (!pipedInput.empty()) {
-        std::cout << "[tool] Piped input:\n";
+    if (!pipedInput.empty())
+    {
+        std::cout << "[tool2] Piped input:\n";
         for (auto& l : pipedInput) std::cout << " > " << l << "\n";
     }
 
